@@ -38,7 +38,7 @@ class Order with _$Order {
 class OrdersResponse with _$OrdersResponse {
   const factory OrdersResponse({
     required bool success,
-    required Order orders,
+    required Order order,
   }) = _OrdersResponse;
 
   factory OrdersResponse.fromJson(Map<String, Object?> json) =>

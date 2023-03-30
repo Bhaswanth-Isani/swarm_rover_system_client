@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:swarm_rover_system_client/auth/auth.dart';
+import 'package:swarm_rover_system_client/dashboard/items_provider.dart';
 import 'package:swarm_rover_system_client/data.dart';
+import 'package:swarm_rover_system_client/payments/payments_provider.dart';
 
 class DashboardPage extends ConsumerWidget {
   const DashboardPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final items = ref.watch(itemsProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Items'),
@@ -40,13 +44,13 @@ class DashboardPage extends ConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Image.asset(
-                    items[index].asset,
+                    'assets/ burger.svg',
                     height: 100,
                   ),
                   Column(
                     children: [
                       Text(
-                        items[index].name,
+                        items[index].itemName,
                         style: GoogleFonts.poppins(
                           fontWeight: FontWeight.w600,
                           fontSize: 24,
@@ -62,12 +66,14 @@ class DashboardPage extends ConsumerWidget {
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          Text(items[index].price.toString()),
+                          Text(items[index].itemPrice.toString()),
                         ],
                       ),
                       const SizedBox(height: 8),
                       ElevatedButton(
-                        onPressed: () => null,
+                        onPressed: () => ref
+                            .read(paymentsProvider.notifier)
+                            .updateOrder(items[index].id),
                         child: const Text('ORDER'),
                       ),
                     ],
