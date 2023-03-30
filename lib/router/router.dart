@@ -6,14 +6,6 @@ import 'package:swarm_rover_system_client/payments/payments_page.dart';
 
 part 'router.g.dart';
 
-@TypedGoRoute<SplashRoute>(path: '/')
-class SplashRoute extends GoRouteData {
-  const SplashRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const SplashPage();
-}
-
 @TypedGoRoute<CreateAccountRoute>(path: '/create-account')
 class CreateAccountRoute extends GoRouteData {
   const CreateAccountRoute();
@@ -31,7 +23,7 @@ class LoginRoute extends GoRouteData {
   Widget build(BuildContext context, GoRouterState state) => const LoginPage();
 }
 
-@TypedGoRoute<DashboardRoute>(path: '/dashboard')
+@TypedGoRoute<DashboardRoute>(path: '/')
 class DashboardRoute extends GoRouteData {
   const DashboardRoute();
 

@@ -21,7 +21,7 @@ abstract class OrdersApiClient {
         const GetItemsInput(hotelId: '63fa60d7593aa1597b7d9697'),
   });
 
-  @GET('/auth/update-orders')
+  @PATCH('/auth/update-order')
   @Headers({'Content-Type': 'application/json'})
   Future<OrdersResponse> updateOrder(
     @Header('authorization') String auth,

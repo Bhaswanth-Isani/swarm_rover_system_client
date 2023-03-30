@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:swarm_rover_system_client/auth/auth.dart';
 import 'package:swarm_rover_system_client/dashboard/items_provider.dart';
-import 'package:swarm_rover_system_client/data.dart';
 import 'package:swarm_rover_system_client/payments/payments_provider.dart';
+import 'package:swarm_rover_system_client/router/router.dart';
 
 class DashboardPage extends ConsumerWidget {
   const DashboardPage({super.key});
@@ -21,6 +21,10 @@ class DashboardPage extends ConsumerWidget {
             onPressed: () =>
                 ref.read(authControllerProvider.notifier).signOut(),
             icon: const Icon(Icons.exit_to_app_rounded),
+          ),
+          IconButton(
+            onPressed: () => const PaymentsRoute().push(context),
+            icon: const Icon(Icons.payments_rounded),
           ),
         ],
       ),
@@ -44,7 +48,7 @@ class DashboardPage extends ConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Image.asset(
-                    'assets/ burger.svg',
+                    'assets/burger.png',
                     height: 100,
                   ),
                   Column(

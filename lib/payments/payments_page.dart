@@ -1,19 +1,30 @@
-import 'dart:developer';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:swarm_rover_system_client/api/orders/orders_api_client.dart';
-import 'package:swarm_rover_system_client/auth/auth.dart';
 import 'package:swarm_rover_system_client/payments/payments_provider.dart';
 
-class PaymentsPage extends ConsumerWidget {
+class PaymentsPage extends ConsumerStatefulWidget {
   const PaymentsPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<PaymentsPage> createState() => _PaymentsPageState();
+}
+
+class _PaymentsPageState extends ConsumerState<PaymentsPage> {
+  @override
+  void initState() {
+    super.initState();
+    ref.read(paymentsProvider.notifier).getOrders();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final orders = ref.watch(paymentsProvider);
+    var total = 0;
+
+    for (var i = 0; i < (orders?.items.length ?? 0); i++) {
+      total += orders?.items[i].itemPrice ?? 0;
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -50,6 +61,19 @@ class PaymentsPage extends ConsumerWidget {
                 },
                 itemCount: orders?.items.length ?? 0,
               ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Total',
+                  style: GoogleFonts.poppins(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(total.toString()),
+              ],
             ),
             SizedBox(
               height: 50,
