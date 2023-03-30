@@ -48,7 +48,9 @@ class DashboardPage extends ConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Image.asset(
-                    'assets/burger.png',
+                    items[index].itemName == 'Salad'
+                        ? 'assets/salad.png'
+                        : 'assets/burger.png',
                     height: 100,
                   ),
                   Column(
