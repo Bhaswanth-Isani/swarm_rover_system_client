@@ -13,7 +13,7 @@ class App extends ConsumerWidget {
     final router = GoRouter(
       routes: $appRoutes,
       debugLogDiagnostics: true,
-      initialLocation: const SplashRoute().location,
+      initialLocation: const PaymentsRoute().location,
       redirect: (context, state) {
         final authState =
             ref.watch(authControllerProvider.select((value) => value.admin));
@@ -23,7 +23,7 @@ class App extends ConsumerWidget {
                     state.location == const SplashRoute().location
                 ? const LoginRoute().location
                 : const CreateAccountRoute().location
-            : const DashboardRoute().location;
+            : const PaymentsRoute().location;
       },
     );
 

@@ -49,7 +49,7 @@ class CreateAccountPage extends ConsumerWidget {
                     const AuthTitleText(
                       topTitle: 'Welcome to',
                       mediumTitle: 'Patrio',
-                      bottomTitle: 'Company',
+                      bottomTitle: 'App',
                     ),
                     CreateAccountForm(
                       onSubmit: () => onCreateAccount(ref),
