@@ -44,3 +44,13 @@ class OrdersResponse with _$OrdersResponse {
   factory OrdersResponse.fromJson(Map<String, Object?> json) =>
       _$OrdersResponseFromJson(json);
 }
+
+@freezed
+class DeleteResponse with _$DeleteResponse {
+  const factory DeleteResponse({
+    required bool success,
+  }) = _DeleteResponse;
+
+  factory DeleteResponse.fromJson(Map<String, Object?> json) =>
+      _$DeleteResponseFromJson(json);
+}

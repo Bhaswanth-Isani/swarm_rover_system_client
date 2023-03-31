@@ -1,7 +1,12 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:swarm_rover_system_client/api/orders/orders_api_client.dart';
+import 'package:swarm_rover_system_client/auth/auth.dart';
 import 'package:swarm_rover_system_client/payments/payments_provider.dart';
+import 'package:swarm_rover_system_client/router/router.dart';
 
 class PaymentsPage extends ConsumerStatefulWidget {
   const PaymentsPage({super.key});
@@ -78,7 +83,17 @@ class _PaymentsPageState extends ConsumerState<PaymentsPage> {
             SizedBox(
               height: 50,
               width: double.infinity,
-              child: ElevatedButton(onPressed: () {}, child: const Text('PAY')),
+              child: ElevatedButton(
+                onPressed: () {
+                  OrdersApiClient(Dio(), baseUrl: dotenv.env['PROD_URL']!)
+                      .deleteOrders(
+                    ref.read(authControllerProvider).admin!.token,
+                  );
+
+                  DashboardRoute().go(context);
+                },
+                child: const Text('PAY'),
+              ),
             ),
           ],
         ),

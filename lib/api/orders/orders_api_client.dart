@@ -21,6 +21,10 @@ abstract class OrdersApiClient {
         const GetItemsInput(hotelId: '63fa60d7593aa1597b7d9697'),
   });
 
+  @DELETE('auth/order')
+  @Headers({'Content-Type': 'application/json'})
+  Future<DeleteResponse> deleteOrders(@Header('authorization') String auth);
+
   @PATCH('/auth/update-order')
   @Headers({'Content-Type': 'application/json'})
   Future<OrdersResponse> updateOrder(
