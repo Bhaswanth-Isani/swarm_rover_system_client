@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -87,7 +89,7 @@ class _PaymentsPageState extends ConsumerState<PaymentsPage> {
                 onPressed: () {
                   OrdersApiClient(Dio(), baseUrl: dotenv.env['PROD_URL']!)
                       .deleteOrders(
-                    ref.read(authControllerProvider).admin!.token,
+                    'Bearer ${ref.read(authControllerProvider).admin!.token}',
                   );
 
                   DashboardRoute().go(context);
